@@ -1,51 +1,32 @@
-// const currentMonthElement = document.getElementById("current-month");
-// const calendarDaysElement = document.getElementById("calendar-days");
+const currentDateElement = document.getElementById("current-date");
+const prevDateButton = document.getElementById("prev-date");
+const nextDataButton = document.getElementById("next-date");
 
-// const prevMonthButton = document.getElementById("prev-month");
-// const nextMonthButton = document.getElementById("next-month");
+let currentDate = new Date();
 
-// let currentDate = new Date();
+function renderDate() {
 
-// function renderCalendar() {
-//     const year = currentDate.getFullYear();
-//     const month = currentDate.getMonth();
+	const year = currentDate.getFullYear();
+	const month = currentDate.getMonth() + 1; // +1 이유?
+	const date = currentDate.getDate();
 
-//     currentMonthElement.textContent = `${year}년 ${month + 1}월`;
+	const weekdays = [
+		"일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"
+	]
 
-//     calendarDaysElement.innerHTML = "";
+	const day = weekdays[currentDate.getDay()];
 
-//     const firstDay = new Date(year, month, 1).getDay();
-//     const lastDate = new Date(year, month + 1, 0).getDate();
+	currentDateElement.textContent = `${year}년 ${month}월 ${date}일 ${day}`;
+}
 
-//     // 이전 달 빈 칸
-//     for (let i = 0; i < firstDay; i++) {
-//         const emptyDay = document.createElement("div");
-//         emptyDay.classList.add("day", "empty");
+prevDateButton.addEventListener("click", () => {
+	currentDate.setDate(currentDate.getDate() - 1);
+	renderDate();
+})
 
-//         calendarDaysElement.appendChild(emptyDay);
-//     }
+nextDataButton.addEventListener("click", () => {
+	currentDate.setDate(currentDate.getDate() + 1);
+	renderDate();
+})
 
-//     // 현재 달 날짜
-//     for (let date = 1; date <= lastDate; date++) {
-//         const dayElement = document.createElement("div");
-
-//         dayElement.classList.add("day");
-//         dayElement.textContent = date;
-
-//         calendarDaysElement.appendChild(dayElement);
-//     }
-// }
-
-// prevMonthButton.addEventListener("click", () => {
-//     currentDate.setMonth(currentDate.getMonth() - 1);
-
-//     renderCalendar();
-// });
-
-// nextMonthButton.addEventListener("click", () => {
-//     currentDate.setMonth(currentDate.getMonth() + 1);
-
-//     renderCalendar();
-// });
-
-// renderCalendar();
+renderDate();
