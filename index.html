@@ -4,37 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Calendar</title>
+    <title>Daylog</title>
 
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
 
-    <main class="calendar">
+    <main class="daylog">
 
-        <header class="calendar-header">
-            <button id="prev-month">&lt;</button>
+        <!-- Header -->
+        <header class="header">
+            <h1>Daylog</h1>
 
-            <h1 id="current-month"></h1>
-
-            <button id="next-month">&gt;</button>
+            <div class="date">
+                2026년 8월 25일
+            </div>
         </header>
 
-        <div class="weekdays">
-            <div>일</div>
-            <div>월</div>
-            <div>화</div>
-            <div>수</div>
-            <div>목</div>
-            <div>금</div>
-            <div>토</div>
-        </div>
 
-        <div id="calendar-days" class="calendar-days"></div>
+        <!-- 계획 & 실행 -->
+        <section class="section">
+            <h2>계획 & 실행</h2>
+
+            <div class="schedule">
+                <div class="schedule-item">
+                    <span class="time">09:00</span>
+                    <span class="title">웹개발 공부</span>
+                </div>
+
+                <div class="schedule-item">
+                    <span class="time">13:00</span>
+                    <span class="title">점심</span>
+                </div>
+
+                <div class="schedule-item">
+                    <span class="time">15:00</span>
+                    <span class="title">운동</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 다짐 -->
+        <section class="section">
+            <h2>다짐</h2>
+
+            <textarea
+                class="text-input"
+                placeholder="오늘의 다짐을 적어보세요."
+            ></textarea>
+        </section>
+
+
+        <!-- 오늘 할 일 -->
+        <section class="section">
+            <h2>오늘 할 일</h2>
+
+            <div class="todo-list">
+
+                <label class="todo-item">
+                    <input type="checkbox">
+                    <span>JavaScript 공부하기</span>
+                </label>
+
+                <label class="todo-item">
+                    <input type="checkbox">
+                    <span>운동하기</span>
+                </label>
+
+                <label class="todo-item">
+                    <input type="checkbox">
+                    <span>책 읽기</span>
+                </label>
+
+            </div>
+        </section>
+
+
+        <!-- 오늘의 기록 -->
+        <section class="section">
+
+            <h2>오늘의 기록</h2>
+
+            <div class="record-grid">
+
+                <div class="record-card">
+                    <h3>일기</h3>
+                    <textarea placeholder="오늘 하루는 어땠나요?"></textarea>
+                </div>
+
+                <div class="record-card">
+                    <h3>메모</h3>
+                    <textarea placeholder="기억하고 싶은 내용을 적어보세요."></textarea>
+                </div>
+
+                <div class="record-card">
+                    <h3>감사</h3>
+                    <textarea placeholder="오늘 감사했던 일을 적어보세요."></textarea>
+                </div>
+
+                <div class="record-card">
+                    <h3>칭찬</h3>
+                    <textarea placeholder="오늘 나를 칭찬해주세요."></textarea>
+                </div>
+
+                <div class="record-card">
+                    <h3>반성</h3>
+                    <textarea placeholder="아쉬웠던 점을 적어보세요."></textarea>
+                </div>
+
+                <div class="record-card">
+                    <h3>교훈</h3>
+                    <textarea placeholder="오늘 배운 것을 적어보세요."></textarea>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 내일 할 일 -->
+        <section class="section">
+            <h2>내일 할 일</h2>
+
+            <textarea
+                class="text-input"
+                placeholder="내일 해야 할 일을 적어보세요."
+            ></textarea>
+        </section>
+
 
     </main>
 
-    <script src="./js/script.js"></script>
 </body>
 </html>
