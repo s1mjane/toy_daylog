@@ -1,29 +1,47 @@
 const currentDateElement = document.getElementById("current-date");
 const prevDateButton = document.getElementById("prev-date");
-const nextDataButton = document.getElementById("next-date");
+const nextDateButton = document.getElementById("next-date");
 
 let currentDate = new Date();
 
-const diaryData = {
+let diaryData = {
     "2026-08-25": {
         promise: "오늘은 JavaScript 공부를 열심히 하자.",
         diary: "웹개발 토이프로젝트를 시작했다.",
+        memo: "Daylog 프로젝트를 만들어보고 있다.",
         gratitude: "오늘도 새로운 것을 배울 수 있어서 감사하다.",
         compliment: "모르는 것도 직접 찾아가며 공부했다.",
         reflection: "코드를 따라 치기만 하지 말고 직접 이해하자.",
-        lesson: "작은 기능부터 하나씩 만드는 것이 중요하다."
+        lesson: "작은 기능부터 하나씩 만드는 것이 중요하다.",
+		tomorrow: "Todo 기능 만들기",
     },
 
     "2026-08-26": {
         promise: "오늘은 운동도 꼭 하자.",
         diary: "오늘은 JavaScript의 DOM을 공부했다.",
+		memo: "DOM 조작 방법을 복습했다.",
         gratitude: "날씨가 좋아서 산책할 수 있었다.",
         compliment: "어려워도 끝까지 공부했다.",
         reflection: "집중력이 조금 부족했다.",
-        lesson: "코드는 직접 작성해봐야 이해가 된다."
+        lesson: "코드는 직접 작성해봐야 이해가 된다.",
+		tomorrow: "localStorage 복습하기",
     }
 };
 
+const STORAGE_KEY = "daylog-data";
+const savedData = localStorage.getItem(STORAGE_KEY);
+
+if (savedData) {
+    diaryData = JSON.parse(savedData);
+}
+
+function getDateKey() {
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const date = String(currentDate.getDate()).padStart(2, "0");
+
+    return `${year}-${month}-${date}`;
+}
 
 function renderDate() {
 
@@ -40,14 +58,6 @@ function renderDate() {
 	currentDateElement.textContent = `${year}년 ${month}월 ${date}일 ${day}`;
 }
 
-function getDateKey() {
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
-    const date = String(currentDate.getDate()).padStart(2, "0");
-
-    return `${year}-${month}-${date}`;
-}
-
 function renderDiary() {
 
 	const dateKey = getDateKey();
@@ -56,22 +66,48 @@ function renderDiary() {
 	if (!data) {
 		document.getElementById("promise").value = "";
 		document.getElementById("diary").value = "";
+		document.getElementById("memo").value = "";
 		document.getElementById("gratitude").value = "";
 		document.getElementById("compliment").value = "";
 		document.getElementById("reflection").value = "";
 		document.getElementById("lesson").value = "";
-
+		document.getElementById("tomorrow").value = "";
+		
 		return;
 	}
 
-	document.getElementById("promise").value = data.promise;
-    document.getElementById("diary").value = data.diary;
-    document.getElementById("gratitude").value = data.gratitude;
-    document.getElementById("compliment").value = data.compliment;
-    document.getElementById("reflection").value = data.reflection;
-    document.getElementById("lesson").value = data.lesson;
+    document.getElementById("promise").value = data.promise || "";
+    document.getElementById("diary").value = data.diary || "";
+    document.getElementById("memo").value = data.memo || "";
+    document.getElementById("gratitude").value = data.gratitude || "";
+    document.getElementById("compliment").value = data.compliment || "";
+    document.getElementById("reflection").value = data.reflection || "";
+    document.getElementById("lesson").value = data.lesson || "";
+    document.getElementById("tomorrow").value = data.tomorrow || "";
 }
 
+function saveDiary() {
+
+	console.log("saveDiary 실행됨");
+
+    const dateKey = getDateKey();
+
+    diaryData[dateKey] = {
+        promise: document.getElementById("promise").value,
+        diary: document.getElementById("diary").value,
+		memo: document.getElementById("memo").value,
+        gratitude: document.getElementById("gratitude").value,
+        compliment: document.getElementById("compliment").value,
+        reflection: document.getElementById("reflection").value,
+        lesson: document.getElementById("lesson").value,
+		tomorrow: document.getElementById("tomorrow").value,
+    };
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(diaryData)
+    );
+}
 
 prevDateButton.addEventListener("click", () => {
 	currentDate.setDate(currentDate.getDate() - 1);
@@ -79,11 +115,23 @@ prevDateButton.addEventListener("click", () => {
 	renderDiary();
 })
 
-nextDataButton.addEventListener("click", () => {
+nextDateButton.addEventListener("click", () => {
 	currentDate.setDate(currentDate.getDate() + 1);
 	renderDate();
 	renderDiary();
 })
+
+const inputs = document.querySelectorAll("textarea");
+
+inputs.forEach((input) => {
+
+    input.addEventListener("input", () => {
+        // console.log("saveDiary 실행됨");
+        saveDiary();
+
+    });
+
+});
 
 renderDate();
 renderDiary();
