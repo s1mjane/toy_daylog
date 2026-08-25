@@ -16,3 +16,113 @@ body {
     background: #d6dde6;
     border-radius: 16px;
 }
+
+.header {
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.header h1{
+    /* background-color: blue; */
+    font-size: 28px;
+    color: rgb(54, 63, 142);
+}
+
+.date {
+    color: rgb(0, 0, 0);
+}
+
+.section {
+    /* background-color: red; */
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    /* background-color: blue; */
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    /* background-color: yellow; */
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.time {
+    width: 70px;
+    color: #888;
+}
+
+.title {
+    font-weight: 500;
+}
+
+/*입력*/
+
+.text-input,
+.record-card textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    resize: vertical; /* ? */
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.text-input:focus,
+.record-card textarea:focus {
+    outline: none;
+    border: 2px solid rgb(247, 242, 109);
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/*기록*/
+
+.record-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.record-card {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background-color: rgb(250, 248, 189);
+}
+
+.record-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.record-card textarea {
+    min-height: 100px;
+}
