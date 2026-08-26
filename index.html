@@ -64,23 +64,18 @@
         <section class="section">
             <h2>오늘 할 일</h2>
 
-            <div class="todo-list">
+            <div id="todo-list" class="todo-list">
+            </div>
 
-                <label class="todo-item">
-                    <input type="checkbox">
-                    <span>JavaScript 공부하기</span>
-                </label>
-
-                <label class="todo-item">
-                    <input type="checkbox">
-                    <span>운동하기</span>
-                </label>
-
-                <label class="todo-item">
-                    <input type="checkbox">
-                    <span>책 읽기</span>
-                </label>
-
+            <div class="todo-input-area">
+                <input
+                    id="todo-input"
+                    type="text"
+                    placeholder="할 일을 입력하세요"
+                >
+                <button id="add-todo">
+                    + 할 일 추가
+                </button>
             </div>
         </section>
 

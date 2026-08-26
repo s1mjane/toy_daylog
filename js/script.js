@@ -28,11 +28,24 @@ let diaryData = {
     }
 };
 
+let todoData = {};
+
+const todoList = document.getElementById("todo-list");
+const todoInput = document.getElementById("todo-input");
+const addTodoButton = document.getElementById("add-todo");
+
 const STORAGE_KEY = "daylog-data";
 const savedData = localStorage.getItem(STORAGE_KEY);
 
 if (savedData) {
     diaryData = JSON.parse(savedData);
+}
+
+const TODO_STORAGE_KEY = "daylog-todo";
+const savedTodoData = localStorage.getItem(TODO_STORAGE_KEY);
+
+if (savedTodoData) {
+	todoData = JSON.parse(savedTodoData);
 }
 
 function getDateKey() {
@@ -109,16 +122,108 @@ function saveDiary() {
     );
 }
 
+function renderTodo() {
+	const dateKey = getDateKey;
+	const todos = todoData[dateKey] || [];
+	todoList.innerHTML = "";
+
+	todos.forEach((todo) => {
+		const todoItem = document.createElement("div");
+		todoItem.classList.add("todo-item");
+		
+		if (todo.completed) {
+			todoItem.classList.add("completed");
+		}
+
+		const checkbox = document.createElement("input");
+		checkbox.type = "checkbox";
+		checkbox.checked = todo.completed;
+
+		const todoText = document.createElement("span");
+		todoText.classList.add("todo-text");
+		todoText.textContent = todo.text;
+
+		const deleteButton = document.createElement("button");
+		deleteButton.classList.add("delete-todo");
+		deleteButton.textContent = "🗑️"
+
+		todoItem.appendChild(checkbox);
+		todoItem.appendChild(todoText);
+		todoItem.appendChild(deleteButton);
+
+		todoList.appendChild(todoItem);
+
+		checkbox.addEventListener("change", () => {
+			todo.completed = checkbox.checked;
+			savedTodo();
+			renderDate();
+		})
+
+		deleteButton.addEventListener("click", () => {
+			deleteTodo(todo.id);
+		})
+
+	}
+);
+}
+
+function addTodo() {
+	const text = todoInput.value.trim();
+	
+	if (text == " ") {
+		return;
+	}
+
+	const dateKey = getDateKey();
+
+	if (!todoData[dateKey]) {
+		todoData[dateKey] = [];
+	}
+
+	const newTodo = {
+		id: Date.now(),
+		text: text,
+		completed: false
+	};
+
+	todoData[dateKey].push(newTodo);
+
+	savedTodo();
+	renderTodo();
+
+	todoInput.value = "";
+}
+
+function saveTodo() {
+	localStorage.setItem(
+		TODO_STORAGE_KEY,
+		JSON.stringify(todoData)
+	);
+}
+
+function deleteTodo(id) {
+	const dateKey = getDateKey();
+
+	todoData[dateKey] = todoData[dateKey].filter((todo) => {
+		return todo.id !== id;
+	});
+
+	saveTodo();
+	renderTodo();
+}
+
 prevDateButton.addEventListener("click", () => {
 	currentDate.setDate(currentDate.getDate() - 1);
 	renderDate();
 	renderDiary();
+	renderTodo();
 })
 
 nextDateButton.addEventListener("click", () => {
 	currentDate.setDate(currentDate.getDate() + 1);
 	renderDate();
 	renderDiary();
+	renderTodo();
 })
 
 const inputs = document.querySelectorAll("textarea");
@@ -126,12 +231,20 @@ const inputs = document.querySelectorAll("textarea");
 inputs.forEach((input) => {
 
     input.addEventListener("input", () => {
-        // console.log("saveDiary 실행됨");
         saveDiary();
 
     });
 
 });
 
+addTodoButton.addEventListener("click", addTodo);
+
+todoInput.addEventListener("keydown", (event) => {
+	if (event.key == "Enter") {
+		addTodo();
+	}
+})
+
 renderDate();
 renderDiary();
+renderTodo();
