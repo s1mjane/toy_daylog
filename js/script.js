@@ -1,3 +1,5 @@
+const todayButton = document.getElementById("today-button");
+
 const prevMonthButton = document.getElementById("prev-month");
 const nextMonthButton = document.getElementById("next-month");
 
@@ -63,12 +65,12 @@ if (savedTodoData) {
 	todoData = JSON.parse(savedTodoData);
 }
 
-function getDateKey() {
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
-    const date = String(currentDate.getDate()).padStart(2, "0");
+function getDateKey(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
 
-    return `${year}-${month}-${date}`;
+    return `${year}-${month}-${day}`;
 }
 
 function renderDate() {
@@ -120,8 +122,15 @@ function renderCalendar() {
 
 		const dateKey = `${year}-${String(month+1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
 
-		if (dateKey === getDateKey()) { // 선택된 날짜
+		if (dateKey === getDateKey(currentDate)) { // 선택한 날짜
 			day.classList.add("selected");
+		}
+
+		const today = new Date();
+		const todayKey = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+		if (dateKey === todayKey) {
+			day.classList.add("today");
 		}
 
 		const hasDiary = diaryData[dateKey] && Object.values(diaryData[dateKey]).some(value => value.trim() !== "");
@@ -160,7 +169,7 @@ function renderCalendar() {
 
 function renderDiary() {
 
-	const dateKey = getDateKey();
+	const dateKey = getDateKey(currentDate);
 	const data = diaryData[dateKey];
 
 	if (!data) {
@@ -190,7 +199,7 @@ function saveDiary() {
 
 	console.log("saveDiary 실행됨");
 
-    const dateKey = getDateKey();
+    const dateKey = getDateKey(currentDate);
 
     diaryData[dateKey] = {
         promise: promiseInput.value,
@@ -210,7 +219,7 @@ function saveDiary() {
 }
 
 function renderTodo() {
-	const dateKey = getDateKey();
+	const dateKey = getDateKey(currentDate);
 	const todos = todoData[dateKey] || [];
 	todoList.innerHTML = "";
 
@@ -261,7 +270,7 @@ function addTodo() {
 		return;
 	}
 
-	const dateKey = getDateKey();
+	const dateKey = getDateKey(currentDate);
 
 	if (!todoData[dateKey]) {
 		todoData[dateKey] = [];
@@ -289,7 +298,7 @@ function saveTodo() {
 }
 
 function deleteTodo(id) {
-	const dateKey = getDateKey();
+	const dateKey = getDateKey(currentDate);
 
 	if (!todoData[dateKey]) {
 		return;
@@ -302,6 +311,14 @@ function deleteTodo(id) {
 	saveTodo();
 	renderTodo();
 }
+
+todayButton.addEventListener("click", () => {
+	currentDate = new Date();
+	renderDate();
+	renderDiary();
+	renderTodo();
+	renderCalendar();
+})
 
 prevMonthButton.addEventListener("click", () => {
 	currentDate.setMonth(currentDate.getMonth() - 1);

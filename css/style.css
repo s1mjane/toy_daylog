@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+/*
+. : class, 같은 종류 여러 개 (그룹/분류)
+# : id, 특정 요소 하나 (이름표)
+*/
+
 body {
     margin: 0;
     background: white;
@@ -17,24 +22,30 @@ body {
     border-radius: 16px;
 }
 
-.header {
-    /* background-color: red; */
+.app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
 }
 
-.header h1{
-    /* background-color: blue; */
-    font-size: 28px;
-    color: rgb(54, 63, 142);
+.app-header h1{
+    font-size: 25px;
+    color: black;
+}
+
+.app-header p {
+    margin: 8px 0 0;
+    color: #999;
+    font-size: 13px;
 }
 
 .date-navigation {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
 }
 
 #current-date {
@@ -51,12 +62,14 @@ body {
     cursor: pointer;
 }
 
-.section {
-    /* background-color: red; */
-    margin-bottom: 40px;
+.calendar-section {
+    margin-bottom:24px;
+    padding: 24px;
+    border: 1px solid #eee;
+    border-radius: 16px;
 }
 
-.section h2 {
+.calendar-section h2 {
     /* background-color: blue; */
     margin-bottom: 15px;
     font-size: 20px;
@@ -149,6 +162,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 12px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .todo-item input[type="checkbox"] {
@@ -162,20 +176,20 @@ body {
 }
 
 .todo-item.completed .todo-text {
+    color: #8e8e8e;
     text-decoration: line-through;
-    color: red;
 }
 
 .delete-todo {
+    margin-left: auto;
     border: none;
     background: none;
-    color: red;
     cursor: pointer;
-    font-size: 15px;
+    opacity: 0.5;
 }
 
 .delete-todo:hover {
-    color: blue;
+    opacity: 1;
 }
 
 #todo-input {
@@ -247,24 +261,17 @@ body {
 }
 
 .calendar-day {
-    min-height: 70px;
-
-    padding: 8px;
-
-    border: 1px solid #eee;
-
-    border-radius: 8px;
-
+    min-height: 64px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 10px;
     cursor: pointer;
-
     position: relative;
-
-    transition: background-color 0.2s;
+    transition: 0.2s;
 }
 
-
 .calendar-day:hover {
-    background-color: #f7f7f7;
+    background-color: #f5f5f5;
 }
 
 
@@ -281,7 +288,8 @@ body {
 
 
 .calendar-day.selected {
-    background-color: #f1f1f1;
+    background: #222;
+    color: white;
 }
 
 
@@ -295,4 +303,17 @@ body {
     display: flex;
     gap: 4px;
     font-size: 12px;
+}
+
+#today-button {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background-color: white;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#today-button.hover {
+    background: #f5f5f5;
 }
