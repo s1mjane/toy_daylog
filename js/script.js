@@ -123,7 +123,7 @@ function saveDiary() {
 }
 
 function renderTodo() {
-	const dateKey = getDateKey;
+	const dateKey = getDateKey();
 	const todos = todoData[dateKey] || [];
 	todoList.innerHTML = "";
 
@@ -156,7 +156,7 @@ function renderTodo() {
 		checkbox.addEventListener("change", () => {
 			todo.completed = checkbox.checked;
 			savedTodo();
-			renderDate();
+			renderTodo();
 		})
 
 		deleteButton.addEventListener("click", () => {
@@ -170,7 +170,7 @@ function renderTodo() {
 function addTodo() {
 	const text = todoInput.value.trim();
 	
-	if (text == " ") {
+	if (text === " ") {
 		return;
 	}
 
@@ -188,7 +188,7 @@ function addTodo() {
 
 	todoData[dateKey].push(newTodo);
 
-	savedTodo();
+	saveTodo();
 	renderTodo();
 
 	todoInput.value = "";
@@ -203,6 +203,10 @@ function saveTodo() {
 
 function deleteTodo(id) {
 	const dateKey = getDateKey();
+
+	if (!todoData[dateKey]) {
+		return;
+	}
 
 	todoData[dateKey] = todoData[dateKey].filter((todo) => {
 		return todo.id !== id;
