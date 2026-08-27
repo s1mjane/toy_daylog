@@ -30,9 +30,9 @@
         <!-- 월별 캘린더-->
         <section class="calendar-section">
             <div class="calendar-hearder">
-                <button id="prev-month">전</button>
+                <button id="prev-month"><</button>
                 <h2 id="calendar-title"></h2>
-                <button id="next-month">후</button>
+                <button id="next-month">></button>
             </div>
             <div class="calendar-weekdays">
                 <div>일</div>
@@ -50,7 +50,7 @@
 
         <!-- 계획 & 실행 -->
         <section class="section">
-            <h2>◼︎ 계획 & 실행</h2>
+            <h3>계획 & 실행</h3>
 
             <div class="schedule">
                 <div class="schedule-item">
@@ -73,7 +73,7 @@
 
         <!-- 다짐 -->
         <section class="section">
-            <h2>다짐</h2>
+            <h3>다짐</h3>
 
             <textarea
                 id = "promise"
@@ -85,7 +85,16 @@
 
         <!-- 오늘 할 일 -->
         <section class="section">
-            <h2>오늘 할 일</h2>
+            
+            <div class="todo-header">
+                <h3>오늘의 할 일</h3>
+                <div class="todo-progress">
+                    <span id="todo-count">0/0</span>
+                    <div class="progress-bar">
+                        <div id="todo-progress-fill"></div>
+                    </div>
+                </div>
+            </div>
 
             <div id="todo-list" class="todo-list">
             </div>
@@ -106,7 +115,7 @@
         <!-- 오늘의 기록 -->
         <section class="section">
 
-            <h2>오늘의 기록</h2>
+            <h3>오늘의 기록</h3>
 
             <div class="record-grid">
 
@@ -165,7 +174,7 @@
 
         <!-- 내일 할 일 -->
         <section class="section">
-            <h2>내일 할 일</h2>
+            <h3>내일 할 일</h3>
 
             <textarea
                 id="tomorrow"

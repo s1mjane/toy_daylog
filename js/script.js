@@ -7,6 +7,9 @@ const currentDateElement = document.getElementById("current-date");
 const prevDateButton = document.getElementById("prev-date");
 const nextDateButton = document.getElementById("next-date");
 
+const todoCount = document.getElementById("todo-count");
+const todoProgressFill = document.getElementById("todo-progress-fill");
+
 const promiseInput = document.getElementById("promise");
 const diaryInput = document.getElementById("diary");
 const memoInput = document.getElementById("memo");
@@ -221,7 +224,20 @@ function saveDiary() {
 function renderTodo() {
 	const dateKey = getDateKey(currentDate);
 	const todos = todoData[dateKey] || [];
-	todoList.innerHTML = "";
+
+	// todo 완료율 계산
+	const completedCount = todos.filter((todo) => todo.completed).length;
+	const totalCount = todos.length;
+
+	let progress = 0;
+	if (totalCount > 0) {
+		progress = (completedCount / totalCount) * 100;
+	}
+	
+	totalCount.textContent = `${completedCount} / ${totalCount}`;
+	todoProgressFill.style.width = `${progress}%`;
+
+	todoList.innerHTML = ""; // Todo 목록 초기화
 
 	todos.forEach((todo) => {
 		const todoItem = document.createElement("div");

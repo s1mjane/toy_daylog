@@ -18,7 +18,7 @@ body {
     width: 700px;
     margin: 40px auto;
     padding: 30px;
-    background: #d6dde6;
+    background: #ffffff;
     border-radius: 16px;
 }
 
@@ -26,7 +26,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .app-header h1{
@@ -45,7 +45,6 @@ body {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 30px;
 }
 
 #current-date {
@@ -64,9 +63,16 @@ body {
 
 .calendar-section {
     margin-bottom:24px;
-    padding: 24px;
+    padding: 10px 20px 10px 20px;
     border: 1px solid #eee;
     border-radius: 16px;
+}
+
+.calendar-section button {
+    border: none;
+    background: none;
+    font-size: 15px;
+    cursor: pointer;
 }
 
 .calendar-section h2 {
@@ -79,24 +85,26 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 30px;
 }
 
 .schedule-item {
     display: flex;
     align-items: center;
-    padding: 14px;
-    /* background-color: yellow; */
+    padding: 12px;
     border: 1px solid #eee;
     border-radius: 10px;
 }
 
 .time {
+    font-size: 13px;
     width: 70px;
     color: #888;
 }
 
 .title {
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
 }
 
 /*입력*/
@@ -119,6 +127,10 @@ body {
     border: 2px solid rgb(247, 242, 109);
 }
 
+#promise {
+    margin-bottom: 10px;
+}
+
 .todo-item {
     display: flex;
     align-items: center;
@@ -138,7 +150,7 @@ body {
     padding: 15px;
     border: 1px solid #eee;
     border-radius: 12px;
-    background-color: rgb(250, 248, 189);
+    background-color: rgb(243, 243, 243);
 }
 
 .record-card h3 {
@@ -148,6 +160,39 @@ body {
 
 .record-card textarea {
     min-height: 100px;
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+#todo-count {
+    color: #999;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 8px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#todo-progress-fill {
+    width: 0;
+    height: 100%;
+    background: #222;
+    border-radius: 10px;
+    transition: width 0.3s ease;
 }
 
 .todo-list {
