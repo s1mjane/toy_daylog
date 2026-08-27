@@ -155,7 +155,7 @@ function renderTodo() {
 
 		checkbox.addEventListener("change", () => {
 			todo.completed = checkbox.checked;
-			savedTodo();
+			saveTodo();
 			renderTodo();
 		})
 
