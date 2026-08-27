@@ -124,10 +124,26 @@ function renderCalendar() {
 			day.classList.add("selected");
 		}
 
-		if ( diaryData[dateKey] || todoData[dateKey]) { // 기록이 있는 날짜
-			const dot = document.createElement("div");
-			dot.classList.add("calendar-dot");
-			day.appendChild(dot);
+		const hasDiary = diaryData[dateKey] && Object.values(diaryData[dateKey]).some(value => value.trim() !== "");
+		const hasTodo = todoData[dateKey] && todoData[dateKey].length > 0;
+
+		if (hasDiary || hasTodo) {
+			const indicators = document.createElement("div");
+			indicators.classList.add("calendar-indicators");
+
+			if (hasDiary) {
+				const diaryIndicator = document.createElement("span");
+				diaryIndicator.textContent = "📔"
+				indicators.appendChild(diaryIndicator);
+			}
+
+			if (hasTodo) {
+				const todoIndicator = document.createElement("span");
+				todoIndicator.textContent = "📋";
+				indicators.appendChild(todoIndicator);
+			}
+
+			day.append(indicators);
 		}
 
 		day.addEventListener("click", () => {

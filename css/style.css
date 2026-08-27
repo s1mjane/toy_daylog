@@ -289,21 +289,10 @@ body {
     font-size: 13px;
 }
 
-
-.calendar-dot {
+.calendar-indicators {
     position: absolute;
-
     bottom: 8px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 5px;
-
-    height: 5px;
-
-    background-color: #222;
-
-    border-radius: 50%;
+    display: flex;
+    gap: 4px;
+    font-size: 12px;
 }
