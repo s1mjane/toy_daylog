@@ -1,6 +1,21 @@
+const prevMonthButton = document.getElementById("prev-month");
+const nextMonthButton = document.getElementById("next-month");
+
 const currentDateElement = document.getElementById("current-date");
 const prevDateButton = document.getElementById("prev-date");
 const nextDateButton = document.getElementById("next-date");
+
+const promiseInput = document.getElementById("promise");
+const diaryInput = document.getElementById("diary");
+const memoInput = document.getElementById("memo");
+const gratitudeInput = document.getElementById("gratitude");
+const complimentInput = document.getElementById("compliment");
+const reflectionInput = document.getElementById("reflection");
+const lessonInput = document.getElementById("lesson");
+const tomorrowInput = document.getElementById("tomorrow");
+
+const calendarTitle = document.getElementById("calendar-title");
+const calendar = document.getElementById("calendar");
 
 let currentDate = new Date();
 
@@ -59,7 +74,7 @@ function getDateKey() {
 function renderDate() {
 
 	const year = currentDate.getFullYear();
-	const month = currentDate.getMonth() + 1; // +1 이유?
+	const month = currentDate.getMonth() + 1;
 	const date = currentDate.getDate();
 
 	const weekdays = [
@@ -71,32 +86,88 @@ function renderDate() {
 	currentDateElement.textContent = `${year}년 ${month}월 ${date}일 ${day}`;
 }
 
+function renderCalendar() {
+	calendar.innerHTML= ""; // 비우기
+
+	const year = currentDate.getFullYear();
+	const month = currentDate.getMonth();
+
+	calendarTitle.textContent = `${year}년 ${month+1}월`;
+
+	const firstDay = new Date(year, month, 1).getDay(); // 이번 달 1일의 요일
+	const lastDate = new Date(year, month+1, 0).getDate(); // 이번 달의 마지막 날짜
+
+	for (let i = 0; i < firstDay; i++) { // 첫 주 빈칸
+		const emptyDay = document.createElement("div");
+		emptyDay.classList.add(
+			"calendar-day",
+			"empty"
+		);
+		calendar.appendChild(emptyDay);
+	}
+
+	// 날짜 생성
+	for (let date = 1; date <= lastDate; date++) { 
+		const day = document.createElement("div");
+		day.classList.add("calendar-day");
+		
+		const dateNumber = document.createElement("div");
+		dateNumber.classList.add("calendar-date");
+
+		dateNumber.textContent = date;
+
+		day.appendChild(dateNumber);
+
+		const dateKey = `${year}-${String(month+1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
+
+		if (dateKey === getDateKey()) { // 선택된 날짜
+			day.classList.add("selected");
+		}
+
+		if ( diaryData[dateKey] || todoData[dateKey]) { // 기록이 있는 날짜
+			const dot = document.createElement("div");
+			dot.classList.add("calendar-dot");
+			day.appendChild(dot);
+		}
+
+		day.addEventListener("click", () => {
+			currentDate = new Date(year, month, date);
+			renderDate();
+			renderDiary();
+			renderTodo();
+			renderCalendar();
+		});
+
+		calendar.appendChild(day);
+	}
+}
+
 function renderDiary() {
 
 	const dateKey = getDateKey();
 	const data = diaryData[dateKey];
 
 	if (!data) {
-		document.getElementById("promise").value = "";
-		document.getElementById("diary").value = "";
-		document.getElementById("memo").value = "";
-		document.getElementById("gratitude").value = "";
-		document.getElementById("compliment").value = "";
-		document.getElementById("reflection").value = "";
-		document.getElementById("lesson").value = "";
-		document.getElementById("tomorrow").value = "";
+		promiseInput.value = "";
+		diaryInput.value = "";
+		memoInput.value = "";
+		gratitudeInput.value = "";
+		complimentInput.value = "";
+		reflectionInput.value = "";
+		lessonInput.value = "";
+		tomorrowInput.value = "";
 		
 		return;
 	}
 
-    document.getElementById("promise").value = data.promise || "";
-    document.getElementById("diary").value = data.diary || "";
-    document.getElementById("memo").value = data.memo || "";
-    document.getElementById("gratitude").value = data.gratitude || "";
-    document.getElementById("compliment").value = data.compliment || "";
-    document.getElementById("reflection").value = data.reflection || "";
-    document.getElementById("lesson").value = data.lesson || "";
-    document.getElementById("tomorrow").value = data.tomorrow || "";
+    promiseInput.value = data.promise || "";
+    diaryInput.value = data.diary || "";
+    memoInput.value = data.memo || "";
+    gratitudeInput.value = data.gratitude || "";
+    complimentInput.value = data.compliment || "";
+    reflectionInput.value = data.reflection || "";
+    lessonInput.value = data.lesson || "";
+    tomorrowInput.value = data.tomorrow || "";
 }
 
 function saveDiary() {
@@ -106,14 +177,14 @@ function saveDiary() {
     const dateKey = getDateKey();
 
     diaryData[dateKey] = {
-        promise: document.getElementById("promise").value,
-        diary: document.getElementById("diary").value,
-		memo: document.getElementById("memo").value,
-        gratitude: document.getElementById("gratitude").value,
-        compliment: document.getElementById("compliment").value,
-        reflection: document.getElementById("reflection").value,
-        lesson: document.getElementById("lesson").value,
-		tomorrow: document.getElementById("tomorrow").value,
+        promise: promiseInput.value,
+        diary: diaryInput.value,
+		memo: memoInput.value,
+        gratitude: gratitudeInput.value,
+        compliment: complimentInput.value,
+        reflection: reflectionInput.value,
+        lesson: lessonInput.value,
+		tomorrow: tomorrowInput.value,
     };
 
     localStorage.setItem(
@@ -170,7 +241,7 @@ function renderTodo() {
 function addTodo() {
 	const text = todoInput.value.trim();
 	
-	if (text === " ") {
+	if (text === "") {
 		return;
 	}
 
@@ -216,11 +287,28 @@ function deleteTodo(id) {
 	renderTodo();
 }
 
+prevMonthButton.addEventListener("click", () => {
+	currentDate.setMonth(currentDate.getMonth() - 1);
+	renderDate();
+	renderDiary();
+	renderTodo();
+	renderCalendar();
+})
+
+nextMonthButton.addEventListener("click", () => {
+	currentDate.setMonth(currentDate.getMonth() + 1);
+	renderDate();
+	renderDiary();
+	renderTodo();
+	renderCalendar();
+})
+
 prevDateButton.addEventListener("click", () => {
 	currentDate.setDate(currentDate.getDate() - 1);
 	renderDate();
 	renderDiary();
 	renderTodo();
+	renderCalendar();
 })
 
 nextDateButton.addEventListener("click", () => {
@@ -228,6 +316,7 @@ nextDateButton.addEventListener("click", () => {
 	renderDate();
 	renderDiary();
 	renderTodo();
+	renderCalendar();
 })
 
 const inputs = document.querySelectorAll("textarea");
@@ -244,7 +333,7 @@ inputs.forEach((input) => {
 addTodoButton.addEventListener("click", addTodo);
 
 todoInput.addEventListener("keydown", (event) => {
-	if (event.key == "Enter") {
+	if (event.key === "Enter") {
 		addTodo();
 	}
 })
@@ -252,3 +341,4 @@ todoInput.addEventListener("keydown", (event) => {
 renderDate();
 renderDiary();
 renderTodo();
+renderCalendar();
