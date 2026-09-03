@@ -17,36 +17,40 @@
         <header class="app-header">
             <h1>DAYLOG</h1>
             <p>오늘을 기록하고 내일을 준비하세요.</p>
-            
-            <!-- 날짜 이동-->
-            <div class="date-navigation">
-                <button id="prev-date"><</button>
-                <button id="today-button">오늘</button>
-                <div id="current-date"></div>
-                <button id="next-date">></button>
+        
+            <div class="date-wrapper">
+                <!-- 날짜 이동-->
+                <div class="date-navigation">
+                    <button id="prev-date"><</button>
+                    <button id="today-button">오늘</button>
+                    <div id="current-date"></div>
+                    <button id="next-date">></button>
+                </div>
             </div>
         </header>
 
-        <!-- 월별 캘린더-->
-        <section class="calendar-section">
-            <div class="calendar-hearder">
-                <button id="prev-month"><</button>
-                <h2 id="calendar-title"></h2>
-                <button id="next-month">></button>
-            </div>
-            <div class="calendar-weekdays">
-                <div>일</div>
-                <div>월</div>
-                <div>화</div>
-                <div>수</div>
-                <div>목</div>
-                <div>금</div>
-                <div>토</div>
-            </div>
-            <div id="calendar" class="calendar">
+        <div id="calendar-container" class="calendar-container">
+            <!-- 월별 캘린더-->
+            <section class="calendar-section">
+                <div class="calendar-hearder">
+                    <button id="prev-month"><</button>
+                    <h2 id="calendar-title"></h2>
+                    <button id="next-month">></button>
+                </div>
+                <div class="calendar-weekdays">
+                    <div>일</div>
+                    <div>월</div>
+                    <div>화</div>
+                    <div>수</div>
+                    <div>목</div>
+                    <div>금</div>
+                    <div>토</div>
+                </div>
+                <div id="calendar" class="calendar">
 
-            </div>
-        </section>
+                </div>
+            </section>
+        </div>
 
         <!-- 계획 & 실행 -->
         <section class="section">

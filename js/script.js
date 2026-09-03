@@ -1,5 +1,7 @@
 const todayButton = document.getElementById("today-button");
 
+const calendarContainer = document.getElementById("calendar-container");
+
 const prevMonthButton = document.getElementById("prev-month");
 const nextMonthButton = document.getElementById("next-month");
 
@@ -160,10 +162,13 @@ function renderCalendar() {
 
 		day.addEventListener("click", () => {
 			currentDate = new Date(year, month, date);
+
 			renderDate();
 			renderDiary();
 			renderTodo();
 			renderCalendar();
+
+			calendarContainer.classList.remove("open");
 		});
 
 		calendar.appendChild(day);
@@ -328,6 +333,16 @@ function deleteTodo(id) {
 	renderTodo();
 }
 
+currentDateElement.addEventListener("click", () => {
+	calendarContainer.classList.toggle("open");
+})
+
+document.addEventListener("click", (event) => {
+	if (!calendarContainer.contains(event.target) && event.target !== currentDateElement) {
+		calendarContainer.classList.remove("open");
+	}
+})
+
 todayButton.addEventListener("click", () => {
 	currentDate = new Date();
 	renderDate();
@@ -354,18 +369,25 @@ nextMonthButton.addEventListener("click", () => {
 
 prevDateButton.addEventListener("click", () => {
 	currentDate.setDate(currentDate.getDate() - 1);
+	
 	renderDate();
 	renderDiary();
 	renderTodo();
 	renderCalendar();
+
+	calendarContainer.classList.remove("open");
 })
 
 nextDateButton.addEventListener("click", () => {
 	currentDate.setDate(currentDate.getDate() + 1);
+
 	renderDate();
 	renderDiary();
 	renderTodo();
 	renderCalendar();
+
+	calendarContainer.classList.remove("open");
+
 })
 
 const inputs = document.querySelectorAll("textarea");

@@ -61,6 +61,14 @@ body {
     cursor: pointer;
 }
 
+.calendar-container {
+    display: none;
+}
+
+.calendar-container.open {
+    display: block;
+}
+
 .calendar-section {
     margin-bottom:24px;
     padding: 10px 20px 10px 20px;
