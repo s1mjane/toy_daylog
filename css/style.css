@@ -8,56 +8,75 @@
 */
 
 body {
-    margin: 0;
     background: white;
     color: #000000;
     font-family: pretendard;
 }
 
-.daylog {
-    width: 700px;
-    margin: 40px auto;
-    padding: 30px;
-    background: #ffffff;
-    border-radius: 16px;
-}
-
 .app-header {
     display: flex;
+    padding: 8px 30px;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    background-color: white;
+}
+
+.daylog {
+    display: flex;
+    align-items: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* background-color: red; */
+    background-color:rgb(243, 243, 243)
+}
+
+.daylog-left {
+    /* background-color: green; */
+    padding: 0px 5px 0px 30px;
+
+}
+
+.daylog-right {
+    /* background-color: blue; */
+    padding: 0px 30px 0px 5px;
+
+}
+
+.app-header-front {
+    display: flex;
 }
 
 .app-header h1{
-    font-size: 25px;
+    font-size: 18px;
     color: black;
 }
 
 .app-header p {
-    margin: 8px 0 0;
     color: #999;
-    font-size: 13px;
+    font-size: 12px;
+    align-items: center;
+    display: flex;
+    margin-left: 15px;
 }
 
 .date-navigation {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 5px;
 }
 
 #current-date {
     min-width: 100px;
     text-align: center;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 13px;
 }
 
 .date-navigation button {
     border: none;
     background: none;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
 }
 
@@ -84,9 +103,18 @@ body {
 }
 
 .calendar-section h2 {
-    /* background-color: blue; */
     margin-bottom: 15px;
     font-size: 20px;
+}
+
+.middle-title {
+    font-size: 15px;
+}
+
+.section-row1 {
+    align-items: center;
+    display: felx;
+
 }
 
 .schedule {
@@ -104,14 +132,14 @@ body {
     border-radius: 10px;
 }
 
-.time {
+.shecule-item-time {
     font-size: 13px;
     width: 70px;
     color: #888;
 }
 
-.title {
-    font-size: 13px;
+.shecule-item-title {
+    font-size: 12px;
     font-weight: 400;
 }
 
@@ -132,7 +160,7 @@ body {
 .text-input:focus,
 .record-card textarea:focus {
     outline: none;
-    border: 2px solid rgb(247, 242, 109);
+    border: 2px solid rgb(255, 0, 0);
 }
 
 #promise {
@@ -154,20 +182,30 @@ body {
     gap: 15px;
 }
 
-.record-card {
-    padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    background-color: rgb(243, 243, 243);
-}
-
-.record-card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-}
 
 .record-card textarea {
     min-height: 100px;
+}
+
+.section-row1 {
+    /* display: flex;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+     */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 15px;
+}
+
+.card-revolution {
+    /* display: flex; */
+    align-items: start;
+}
+
+.card-todo {
+    /* display: flex; */
+    align-items: start;
 }
 
 .todo-header {
@@ -188,7 +226,7 @@ body {
 }
 
 .progress-bar {
-    width: 200px;
+    /* width: 200px auto; */
     height: 8px;
     background: #eee;
     border-radius: 10px;
@@ -359,12 +397,13 @@ body {
 }
 
 #today-button {
-    padding: 6px 12px;
+    padding: 3px 9px;
     border: 1px solid #ddd;
     border-radius: 20px;
     background-color: white;
-    font-size: 13px;
+    font-size: 12px;
     cursor: pointer;
+    font-weight: 500;
 }
 
 #today-button.hover {

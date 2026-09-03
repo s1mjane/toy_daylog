@@ -10,184 +10,186 @@
 </head>
 
 <body>
-
-    <main class="daylog">
-
-        <!-- Header -->
-        <header class="app-header">
+    <!-- Header -->
+    <header class="app-header">
+        <div class="app-header-front">
             <h1>DAYLOG</h1>
             <p>오늘을 기록하고 내일을 준비하세요.</p>
-        
-            <div class="date-wrapper">
-                <!-- 날짜 이동-->
-                <div class="date-navigation">
-                    <button id="prev-date"><</button>
-                    <button id="today-button">오늘</button>
-                    <div id="current-date"></div>
-                    <button id="next-date">></button>
-                </div>
+        </div>
+    
+        <div class="date-wrapper">
+            <!-- 날짜 이동-->
+            <div class="date-navigation">
+                <button id="prev-date"><</button>
+                <button id="today-button">오늘</button>
+                <div id="current-date"></div>
+                <button id="next-date">></button>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <div id="calendar-container" class="calendar-container">
-            <!-- 월별 캘린더-->
-            <section class="calendar-section">
-                <div class="calendar-hearder">
-                    <button id="prev-month"><</button>
-                    <h2 id="calendar-title"></h2>
-                    <button id="next-month">></button>
-                </div>
-                <div class="calendar-weekdays">
-                    <div>일</div>
-                    <div>월</div>
-                    <div>화</div>
-                    <div>수</div>
-                    <div>목</div>
-                    <div>금</div>
-                    <div>토</div>
-                </div>
-                <div id="calendar" class="calendar">
-
+    <main class="daylog">
+        <div class="daylog-left">
+            <div id="calendar-container" class="calendar-container">
+                <!-- 월별 캘린더-->
+                <section class="calendar-section">
+                    <div class="calendar-hearder">
+                        <button id="prev-month"><</button>
+                        <h2 id="calendar-title"></h2>
+                        <button id="next-month">></button>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div>일</div>
+                        <div>월</div>
+                        <div>화</div>
+                        <div>수</div>
+                        <div>목</div>
+                        <div>금</div>
+                        <div>토</div>
+                    </div>
+                    <div id="calendar" class="calendar">
+    
+                    </div>
+                </section>
+            </div>
+    
+            <!-- 계획 & 실행 -->
+            <section>
+                <h3 class="middle-title">계획 & 실행</h3>
+    
+                <div class="schedule">
+                    <div class="schedule-item">
+                        <span class="shecule-item-time">09:00</span>
+                        <span class="shecule-item-title">웹개발 공부</span>
+                    </div>
+    
+                    <div class="schedule-item">
+                        <span class="shecule-item-time">13:00</span>
+                        <span class="shecule-item-title">점심</span>
+                    </div>
+    
+                    <div class="schedule-item">
+                        <span class="shecule-item-time">15:00</span>
+                        <span class="shecule-item-title">운동</span>
+                    </div>
                 </div>
             </section>
         </div>
+    
+        <div class="daylog-right">
 
-        <!-- 계획 & 실행 -->
-        <section class="section">
-            <h3>계획 & 실행</h3>
-
-            <div class="schedule">
-                <div class="schedule-item">
-                    <span class="time">09:00</span>
-                    <span class="title">웹개발 공부</span>
+            <!-- 다짐 & 오늘 할 일-->
+            <section class="section-row1">
+                <!-- 다짐 -->
+                <div class="record-card">
+                    <h3 class="middle-title">다짐</h3>
+                    <textarea
+                        id = "promise"
+                        class="text-input"
+                        placeholder="오늘의 다짐을 적어보세요."
+                    ></textarea>
                 </div>
 
-                <div class="schedule-item">
-                    <span class="time">13:00</span>
-                    <span class="title">점심</span>
-                </div>
-
-                <div class="schedule-item">
-                    <span class="time">15:00</span>
-                    <span class="title">운동</span>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- 다짐 -->
-        <section class="section">
-            <h3>다짐</h3>
-
-            <textarea
-                id = "promise"
-                class="text-input"
-                placeholder="오늘의 다짐을 적어보세요."
-            ></textarea>
-        </section>
-
-
-        <!-- 오늘 할 일 -->
-        <section class="section">
-            
-            <div class="todo-header">
-                <h3>오늘의 할 일</h3>
-                <div class="todo-progress">
-                    <span id="todo-count">0/0</span>
-                    <div class="progress-bar">
-                        <div id="todo-progress-fill"></div>
+                <!-- 오늘 할 일 -->
+                <div class="record-card">
+                    <div class="todo-header">
+                        <h3 class="middle-title">오늘의 할 일</h3>
+                        <div class="todo-progress">
+                            <span id="todo-count">0/0</span>
+                            <div class="progress-bar">
+                                <div id="todo-progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div id="todo-list" class="todo-list">
+                    </div>
+        
+                    <div class="todo-input-area">
+                        <input
+                            id="todo-input"
+                            type="text"
+                            placeholder="할 일을 입력하세요"
+                        >
+                        <button id="add-todo">
+                            + 할 일 추가
+                        </button>
                     </div>
                 </div>
-            </div>
-
-            <div id="todo-list" class="todo-list">
-            </div>
-
-            <div class="todo-input-area">
-                <input
-                    id="todo-input"
-                    type="text"
-                    placeholder="할 일을 입력하세요"
-                >
-                <button id="add-todo">
-                    + 할 일 추가
-                </button>
-            </div>
-        </section>
-
-
-        <!-- 오늘의 기록 -->
-        <section class="section">
-
-            <h3>오늘의 기록</h3>
-
-            <div class="record-grid">
-
+            </section>  
+            
+            <section class="section-row2">
                 <div class="record-card">
-                    <h3>일기</h3>
+                    <h3 class="middle-title">QT</h3>
+                    <textarea 
+                        id="qt"
+                        placeholder="기억하고 싶은 내용을 적어보세요."
+                    ></textarea>
+                </div>
+            </section>
+
+            <section class="section-row3">
+                <div class="record-card">
+                    <h3 class="middle-title">일기</h3>
                     <textarea 
                         id = "diary"
                         placeholder="오늘 하루는 어땠나요?">
                     </textarea>
                 </div>
-
-                <div class="record-card">
-                    <h3>메모</h3>
-                    <textarea 
-                        id="memo"
-                        placeholder="기억하고 싶은 내용을 적어보세요."
-                    ></textarea>
+            </section>
+    
+            <!-- 오늘의 기록 -->
+            <section class="section">
+                <div class="record-grid">
+    
+                    <div class="record-card">
+                        <h3 class="middle-title">감사</h3>
+                        <textarea
+                            id="gratitude"
+                            placeholder="오늘 감사했던 일을 적어보세요."
+                        ></textarea>
+                    </div>
+    
+                    <div class="record-card">
+                        <h3 class="middle-title">칭찬</h3>
+                        <textarea 
+                            id="compliment"
+                            placeholder="오늘 나를 칭찬해주세요."
+                        ></textarea>
+                    </div>
+    
+                    <div class="record-card">
+                        <h3 class="middle-title">반성</h3>
+                        <textarea 
+                            id="reflection"
+                            placeholder="아쉬웠던 점을 적어보세요."
+                        ></textarea>
+                    </div>
+    
+                    <div class="record-card">
+                        <h3 class="middle-title">교훈</h3>
+                        <textarea 
+                            id="lesson"
+                            placeholder="오늘 배운 것을 적어보세요."
+                        ></textarea>
+                    </div>
+    
                 </div>
-
-                <div class="record-card">
-                    <h3>감사</h3>
-                    <textarea
-                        id="gratitude"
-                        placeholder="오늘 감사했던 일을 적어보세요."
-                    ></textarea>
-                </div>
-
-                <div class="record-card">
-                    <h3>칭찬</h3>
-                    <textarea 
-                        id="compliment"
-                        placeholder="오늘 나를 칭찬해주세요."
-                    ></textarea>
-                </div>
-
-                <div class="record-card">
-                    <h3>반성</h3>
-                    <textarea 
-                        id="reflection"
-                        placeholder="아쉬웠던 점을 적어보세요."
-                    ></textarea>
-                </div>
-
-                <div class="record-card">
-                    <h3>교훈</h3>
-                    <textarea 
-                        id="lesson"
-                        placeholder="오늘 배운 것을 적어보세요."
-                    ></textarea>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- 내일 할 일 -->
-        <section class="section">
-            <h3>내일 할 일</h3>
-
-            <textarea
-                id="tomorrow"
-                class="text-input"
-                placeholder="내일 해야 할 일을 적어보세요."
-            ></textarea>
-        </section>
-
-
+    
+            </section>
+    
+    
+            <!-- 내일 할 일 -->
+            <section class="section">
+                <h3 class="middle-title">내일 할 일</h3>
+    
+                <textarea
+                    id="tomorrow"
+                    class="text-input"
+                    placeholder="내일 해야 할 일을 적어보세요."
+                ></textarea>
+            </section>
+        </div>
     </main>
 
     <script src="./js/script.js"></script>

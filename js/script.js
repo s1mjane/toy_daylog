@@ -90,7 +90,8 @@ function renderDate() {
 
 	const day = weekdays[currentDate.getDay()];
 
-	currentDateElement.textContent = `${year}년 ${month}월 ${date}일 ${day}`;
+	// currentDateElement.textContent = `${year}년 ${month}월 ${date}일 ${day}`;
+	currentDateElement.textContent = `${month}월 ${date}일 ${day}  💖`;
 }
 
 function renderCalendar() {
@@ -369,7 +370,7 @@ nextMonthButton.addEventListener("click", () => {
 
 prevDateButton.addEventListener("click", () => {
 	currentDate.setDate(currentDate.getDate() - 1);
-	
+
 	renderDate();
 	renderDiary();
 	renderTodo();
